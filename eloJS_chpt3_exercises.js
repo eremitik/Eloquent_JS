@@ -24,4 +24,26 @@ console.log(isEven(50));
 
 
 
-//Bean Counting (WIP)
+//Bean Counting
+function countBs(word){
+  var count = 0
+  for (i=0; i<word.length; i++)
+    if (word.charAt(i)=="B")
+      count += 1;
+    else
+      count += 0;
+  return count 
+}
+console.log(countBs("BBC"));
+
+
+function countChar(word, letter){
+  var count = 0
+  for (i=0; i<word.length; i++)
+    if (word.charAt(i)==letter)
+      count += 1;
+    else
+      count += 0;
+  return count
+}
+console.log(countChar('kakkerlak', 'k'))
