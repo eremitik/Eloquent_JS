@@ -5,12 +5,15 @@ console.log(listOfNumbers[2-1]);        //returns 3
 
 
 
+
 //Properties
 console.log(listOfNumbers.length);      //returns 5
 console.log(listOfNumbers['length']);   //returns 5, but is uncommon to use in sq-brackets. 
 /*Typically you use the dot notation when you know the property name. 
 Use square brackets when you want to evaluate to get the property name. 
 */
+
+
 
 
 //Methods
@@ -25,6 +28,7 @@ console.log(mack);                      //returns ['Mack', 'the', 'Knife']
 console.log(mack.join(" "));            //returns 'Mack the Knife'
 console.log(mack.pop());                //returns 'Knife', as it pops the last item
 console.log(mack);                      //returns ['Mack', 'the'] as 'Knife' is popped
+
 
 
 
@@ -60,6 +64,7 @@ var journal = [
 
 
 
+
 //Mutability
 var object1 = {value: 10};
 var object2 = object1;
@@ -70,6 +75,7 @@ console.log(object1 == object3);        //returns false
 object1.value = 15;
 console.log(object2.value);             //returns 15
 console.log(object3.value);             //returns 10
+
 
 
 
@@ -195,6 +201,7 @@ console.log(tableFor('pizza', JOURNAL));    //returns [76, 9, 4, 1]
 
 
 
+
 //Objects as maps
 var map = {};
 function storePhi(event, phi) {
@@ -204,6 +211,7 @@ storePhi('pizza', 0.069);
 storePhi('touched tree', -0.081);
 console.log('pizza' in map);            //returns true
 console.log(map['touched tree']);       //returns -0.081
+
 
 
 
@@ -240,3 +248,90 @@ for (var i=0; i<JOURNAL.length; i++) {
     entry.events.push('peanut teeth');
 }
 console.log(phi(tableFor('peanut teeth', JOURNAL)));   //returns 1
+
+
+
+
+//Further Arrayology
+var todoList = [];
+function rememberTo(task) {
+  todoList.push(task);
+}
+function whatIsNext() {
+  return todoList.shift();
+}
+
+console.log([1,2,3,2,1].indexOf(2));        //returns 1 (finding where the first 2 is)
+console.log([1,2,3,2,1].lastIndexOf(2));    //returns 3 (starting from the back, where the 2 is)
+
+console.log([0,1,2,3,4].slice(2,4));        //returns [2,3], as it grabs the numbers from position 2~3, 4 is excluded
+console.log([0,1,2,3,4].slice(2));          //returns [2,3,4] as it grabs everything after position 2, including position 2
+
+function remove(array, index) {
+  return array.slice(0, index)              //grabs position 0~x
+    .concat(array.slice(index+1));          //combines with position x+1 and beyond (thus leaving x behind)
+}
+console.log(remove(['a','b','c','d','e'], 2));    //returns ['a','b','d','e'] as it removes position 2
+
+
+
+
+//Strings and their Properties
+var myString = 'Fido'
+myString.myProperty = 'value'
+console.log(myString.myProperty);           //returns 'undefined', as myProperty won't stick.
+
+console.log('coconuts'.slice(4,7));         //returns 'nut' as expected
+console.log('coconuts'.indexOf("u"));       //returns '5' as expected
+console.log('one two three'.indexOf('ee'));   //returns '11'
+console.log('   okay  \n '.trim());         //returns 'okay'. removes all the spaces
+
+var string = 'abc';
+console.log(string.length);                 //returns '3'
+console.log(string.charAt(0));              //returns 'a'
+console.log(string[1]);                     //returns 'b'
+
+
+
+
+//The Arguments Object
+function noArguments(){}
+noArguments(1,2,3);
+function threeArguments(a,b,c){}
+threeArguments();                           //this works like an array, but can't use the usual methods like slice and indexOf
+
+function argumentCounter(){
+  console.log('You gave me', arguments.length, 'arguments.');
+}
+argumentCounter('Straw man', 'Tautology', 'Ad hominem');    //returns 'You gave me 3 arguments', although the arguments given were irrelevant
+argumentCounter('x', 'y');                                  //returns 'You gave me 2 arguments'
+
+function addEntry(squirrel){
+  var entry = {events: [], squirrel: squirrel};
+  for (var i=1; i<arguments.length; i++)
+    entry.events.push(arguments[i]);
+  journal.push(entry);
+}
+addEntry(true, 'work', 'touched tree', 'pizza', 'running', 'television')  //created a function to easily add entries
+
+
+
+
+//The Math Object
+/*"Many languages will stopy you, or at least warn you, when you are defining a variable 
+with a name that is already taken. JS does neither, so be careful"*/
+function randomPointOnCircle(radius){
+  var angle = Math.random()*2*Math.PI;
+  return {x: radius*Math.cos(angle),
+          y: radius*Math.sin(angle)};
+}
+console.log(randomPointOnCircle(2));          //returns {x: -0.9163, y: 1.777} and random every refresh
+console.log(Math.floor(Math.random()*10));    //returns a random whole number
+
+
+
+
+//The Global Object
+var myVar = 10;
+console.log(window.myVar)           //returns '10' in browser, in shell 'window' doesn't work
+console.log('myVar' in window);     //returns 'true' in browser, in shell the 'window' is not defined so will error
