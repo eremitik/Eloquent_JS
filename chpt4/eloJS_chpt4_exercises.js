@@ -33,10 +33,6 @@ function range(start, end, step){
   }
   return array
 }
-console.log(range(1,10));
-console.log(range(5,2,-1));
-console.log(sum(range(1,10)));
-
 
 
 
@@ -48,19 +44,34 @@ function reversedArray(array){
   }
   return temp
 }
-console.log(reversedArray(['A','B','C','D']));
+
+
+function reverseArrayInPlace(array){
+  var temp = [];
+  for (i=0; i<Math.floor(array.length/2); i++){
+    temp = array[i]
+    array[i] = array[array.length-1-i]
+    array[array.length-1-i] = temp
+  }
+  return array
+}
 
 
 
-// function reverseArrayInPlace(array){
-//   var temp = [];
-//   for (i=0; i<Math.floor(array.length/2); i++){
-//     temp = array[i]
-//     array[i] = array[array.length-1-i]
-//     array[array.length-1-i] = temp
-//   }
-//   return array
-// }
-// console.log(reverseArrayInPlace(['A','B','C','D','E']));
+//A List
+function arrayToList(array){
+  var list = {};
+  for (i=array.length-1; i>=0; i--){
+    list = { value: array[i], rest: list};
+  }
+  return list
+}
 
 
+function listToArray(list){
+  var array = [];
+  for (var node = list; node; node=node.rest){
+    array.push(node.value);
+  }
+  return array
+}
