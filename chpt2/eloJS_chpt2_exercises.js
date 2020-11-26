@@ -16,11 +16,11 @@ for (i=1; i<=100; i++)
 
 //Chess Board
 var spaces = 8;
-for (col=0; col<spaces; col++){
-  var lines = '';
-  for (row=0; row<spaces; row++){
-       var sum = col+row;
-       sum%2==0 ? lines += ' ' : lines += '#';
+for (row=0; row<spaces; row++){
+  var board = '';
+  for (col=0; col<spaces; col++){
+       var sum = row+col;
+       sum%2==0 ? board += ' ' : board += '#';
   };
-  console.log(lines);
+  console.log(board);
 };
