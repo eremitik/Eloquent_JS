@@ -1,20 +1,21 @@
 //The Sum of a Range
-function range(start, end) {
-  var array = [];
-  for (i=start; i<=end; i++){
-    array.push(i)
+function range(a,b){
+  newArr = [];
+  for (i=a; i<=b; i++){
+    newArr.push(i)
   }
-  return array
+  return newArr
 }
-
 
 function sum(array){
-  var summation = 0;
+  let tally = 0
   for (i=0; i<array.length; i++){
-    summation += array[i]
+    tally += array[i]
   }
-  return summation
+  return tally
 }
+
+
 
 
 //bonus assignment, modifying 'range' function
@@ -45,6 +46,15 @@ function reversedArray(array){
   return temp
 }
 
+//another version (one week later):
+function reverseArray(array){
+  newArr = [];
+  for (i=0; i<array.length; i++){
+    newArr.unshift(array[i])
+  }
+  return newArr
+}
+
 
 function reverseArrayInPlace(array){
   var temp = [];
@@ -60,18 +70,62 @@ function reverseArrayInPlace(array){
 
 //A List
 function arrayToList(array){
-  var list = {};
+  newObj = {};
   for (i=array.length-1; i>=0; i--){
-    list = { value: array[i], rest: list};
+    newObj = {value: array[i], rest: newObj}
   }
-  return list
+  return newObj
 }
 
 
-function listToArray(list){
-  var array = [];
-  for (var node = list; node; node=node.rest){
-    array.push(node.value);
+function listToArray(obj){
+  let newArr = [];
+  for (j=obj; j; j=j.rest){ //j.rest, dot notion for looking into obj to pull 'rest' values
+    newArr.push(j.value)
   }
-  return array
+  return newArr
 }
+
+
+
+//need to study what's below here...
+function prepend(elements, list){
+  var newList = {value: elements, rest: list};
+  return newList
+}
+console.log(prepend(10, prepend(20, null)));
+
+
+
+
+function nth (list, num){
+  if (!list){
+    return undefined;
+  } else if (num === 0){
+    return list.value;
+  } else {
+    return nth(list.rest, num-1);
+  }
+}
+console.log(nth(arrayToList([10, 20, 30]), 0))
+
+
+
+//Deep Equal
+function deepEqual(a,b){
+  return a === b ? true : 
+  (a == null || typeof a != 'object' || b == null || typeof b != 'object') ? false : true
+
+  var argsA = 0, argsB = 0;
+  for (var prop in a)
+    argsA += 1;
+
+  for (var arg in b){
+    argsB += 1;
+    (!(arg in a) || !deepEqual(a[arg], b[arg])) ? false : true
+  }
+  return argsA == argsB;
+}
+var obj = {here: {is: "an"}, object: 2};
+console.log(deepEqual(obj, obj));
+
