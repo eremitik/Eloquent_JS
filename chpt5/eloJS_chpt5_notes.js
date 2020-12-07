@@ -73,3 +73,55 @@ repeat(3, function(n){unless(n%2, function(){console.log(n, 'is even')})})
 
 
 //Passing Along Arguments
+/*function 'noisy' has defect, as we don't know how many args it can take. 
+to get around this, we can use apply method*/
+function tranparentWrapping(f){
+  return function(){
+    return f.apply(null, arguments);
+  };
+}
+
+
+
+//Filtering an Array
+function filter(array, test){
+  var passed = []
+  for (var i = 0; i<array.length; i++){
+    if (test(array[i]))
+      passed.push(array[i])
+  }
+  return passed
+}
+
+
+
+//Transforming with Map
+function map(array, transform){
+  var mapped = []
+  for (var i = 0; i<array.length; i++)
+    mapped.push(transform(array[i]))
+  return mapped
+}
+
+
+//Summarizing with Reduce
+function reduce(array, combine, start){
+  var current = start
+  for(var i=0; i<array.length; i++)
+    current = combine(current, array[i])
+  return current
+}
+console.log(reduce([1,2,3,4], function(a,b){return a+b}, 0))
+
+
+
+//Composability
+function average(array){
+  function plus(a,b){return b+b}
+  return array.reduce(plus)/array.length
+}
+/*no need to write long code, can compose the logic neatly to write concise code./*
+
+
+
+//***for code chrysalis, its recommended to skip sections 'JSON' and 'The cost~Binding' for now. 
