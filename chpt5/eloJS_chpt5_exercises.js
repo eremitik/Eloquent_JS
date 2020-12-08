@@ -134,7 +134,9 @@ console.log(someFunc([2, 3, 4], isNaN))
 
 //nested function answer
 function everyFuncy(arr, func){
-  return arr.every(n => func(n))
+  return arr.every(function(n){
+    return func(n)
+  })
 }
 console.log(everyFuncy([NaN, NaN, NaN], isNaN))
 console.log(everyFuncy([NaN, NaN, 4], isNaN))
@@ -150,10 +152,10 @@ console.log(someFuncy([2, 3, 4], isNaN))
 
 
 //quicker version
-function everyFunc(arr, arg){
+function everyFunce(arr, arg){
   return arr.every(arg)
 }
 
-function someFunc(arr, arg){
+function someFunce(arr, arg){
   return arr.some(arg)
 }
