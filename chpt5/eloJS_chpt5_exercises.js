@@ -100,5 +100,33 @@ ancestry.forEach(function(person){
 console.log(dict)
 
 for (key in dict){
-  console.log(key, ': ', Math.round(average(dict[key])*10)/10)
+  console.log(`${key}: ${Math.round(average(dict[key])*10)/10}`)
 }
+
+
+
+
+
+//Every and then Some
+function everyFunc(arr, arg){
+  count = 0
+  for (i=0; i<arr.length; i++){
+    if (arg(arr[i]))
+      count++
+    }
+  return count===arr.length
+}
+console.log(everyFunc([NaN, NaN, NaN], isNaN))
+console.log(everyFunc([NaN, NaN, 4], isNaN))
+
+
+function someFunc(arr, arg){
+  count = 0
+  for (i=0; i<arr.length; i++){
+    if (arg(arr[i]))
+      count++
+    }
+  return count>0
+}
+console.log(someFunc([NaN, 3, 4], isNaN))
+console.log(someFunc([2, 3, 4], isNaN))
