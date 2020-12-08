@@ -66,8 +66,8 @@ ancestry.forEach(function(person){
 
 var delta = []
 ancestry.forEach(function(person){
-  if (byName[person.mother] != null){
-    return delta.push(person.born - byName[person.mother].born)
+  if (byName[person.mother] != null){   //person.mother gives you the mother's name from ancestry list, then checks if the mother is in the byName array
+    return delta.push(person.born - byName[person.mother].born) //if the mother is in the byName array, then subtracts both person & mother's birth years
     }
 })
 
@@ -130,3 +130,30 @@ function someFunc(arr, arg){
 }
 console.log(someFunc([NaN, 3, 4], isNaN))
 console.log(someFunc([2, 3, 4], isNaN))
+
+
+//nested function answer
+function everyFuncy(arr, func){
+  return arr.every(n => func(n))
+}
+console.log(everyFuncy([NaN, NaN, NaN], isNaN))
+console.log(everyFuncy([NaN, NaN, 4], isNaN))
+
+
+function someFuncy(arr, func){
+  return arr.some(function(n){
+    return func(n)
+  })
+}
+console.log(someFuncy([NaN, 3, 4], isNaN))
+console.log(someFuncy([2, 3, 4], isNaN))
+
+
+//quicker version
+function everyFunc(arr, arg){
+  return arr.every(arg)
+}
+
+function someFunc(arr, arg){
+  return arr.some(arg)
+}
