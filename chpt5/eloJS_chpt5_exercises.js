@@ -76,8 +76,6 @@ function average(arr){
 }
 console.log(average(delta))
 
-
-
 //shorthand way, easier to read code
 var byName = []
 var delta = []
@@ -85,3 +83,22 @@ ancestry.forEach(person => byName[person.name]=person)
 ancestry.forEach(person => byName[person.mother] != null ? delta.push(person.born - byName[person.mother].born) : '')
 var average = arr => arr.reduce((a,b)=>a+b) / arr.length
 console.log(average(delta))
+
+
+
+
+
+//Historical Life Expectancy
+var dict = {}
+ancestry.forEach(function(person){
+  var century = Math.ceil(person.died/100)
+  if (!dict[century]){
+    dict[century] = []
+  }
+  dict[century].push(person.died - person.born)
+})
+console.log(dict)
+
+for (key in dict){
+  console.log(key, ': ', Math.round(average(dict[key])*10)/10)
+}
