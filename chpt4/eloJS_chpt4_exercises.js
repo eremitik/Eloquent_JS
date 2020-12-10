@@ -112,8 +112,27 @@ function nth(list, n){
 
 
 //Deep Comparison
-/*need to re-do, previous solution did not work for all conditions.*/
+/*need to keep restudying this one, toughest one in the book so far.*/
+function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a == null || typeof a != "object" || b == null || typeof b != "object")
+    return false;
+
+  var propsInA = 0, propsInB = 0;
+
+  for (var prop in a)
+     propsInA += 1;
+
+  for (var prop in b) {
+    propsInB += 1;
+    if (!(prop in a) || !deepEqual(a[prop], b[prop]))
+      return false;
+  }
+
+  return propsInA == propsInB;
+}
 var obj = {here: {is: "an"}, object: 2};
-var objTwo = {here: {is: "an"}, odfasdfasdbject: 3, asdfad: 4545};
+var objTwo = {here: {is: "an"}, object: 3};
 console.log(deepEqual(obj, objTwo));
 
