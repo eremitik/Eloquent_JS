@@ -70,7 +70,7 @@ function reverseArrayInPlace(array){
 
 //A List
 function arrayToList(array){
-  newObj = {};
+  newObj = null;
   for (i=array.length-1; i>=0; i--){
     newObj = {value: array[i], rest: newObj}
   }
@@ -87,15 +87,11 @@ function listToArray(obj){
 }
 
 
-
-//need to study what's below here...
 function prepend(elements, list){
   var newList = {value: elements, rest: list};
   return newList
 }
 console.log(prepend(10, prepend(20, null)));
-
-
 
 
 function nth (list, num){
@@ -109,23 +105,15 @@ function nth (list, num){
 }
 console.log(nth(arrayToList([10, 20, 30]), 0))
 
-
-
-//Deep Equal
-function deepEqual(a,b){
-  return a === b ? true : 
-  (a == null || typeof a != 'object' || b == null || typeof b != 'object') ? false : true
-
-  var argsA = 0, argsB = 0;
-  for (var prop in a)
-    argsA += 1;
-
-  for (var arg in b){
-    argsB += 1;
-    (!(arg in a) || !deepEqual(a[arg], b[arg])) ? false : true
-  }
-  return argsA == argsB;
+//better version, one week later
+function nth(list, n){
+  return !list ? undefined : n===0 ? list.value : nth(list.rest, n-1)
 }
+
+
+//Deep Comparison
+/*need to re-do, previous solution did not work for all conditions.*/
 var obj = {here: {is: "an"}, object: 2};
-console.log(deepEqual(obj, obj));
+var objTwo = {here: {is: "an"}, odfasdfasdbject: 3, asdfad: 4545};
+console.log(deepEqual(obj, objTwo));
 
