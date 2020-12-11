@@ -102,6 +102,20 @@ for (key in dict){
   console.log(`${key}: ${Math.round(average(dict[key])*10)/10}`)
 }
 
+//ver. 2 (alternative solution)
+var dict = {}
+ancestry.forEach(function(person){
+  var century = Math.ceil(person.died/100)
+  
+  if (dict[century]){
+    dict[century].push(person.died - person.born)
+  } else {
+    dict[century] = [person.died - person.born]
+  }
+})
+for (key in dict){
+  console.log(`${key}: ${Math.round(average(dict[key])*10)/10}`)
+}
 
 
 
@@ -137,18 +151,12 @@ function everyFuncy(arr, func){
     return func(n)
   })
 }
-console.log(everyFuncy([NaN, NaN, NaN], isNaN))
-console.log(everyFuncy([NaN, NaN, 4], isNaN))
-
 
 function someFuncy(arr, func){
   return arr.some(function(n){
     return func(n)
   })
 }
-console.log(someFuncy([NaN, 3, 4], isNaN))
-console.log(someFuncy([2, 3, 4], isNaN))
-
 
 //quicker version
 function everyFunce(arr, arg){
